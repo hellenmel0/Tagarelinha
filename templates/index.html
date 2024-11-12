@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tagarelinha: Aprenda brincando com letras e desenhos!">
+    <meta name="keywords" content="Educação, Aprendizagem, Letras, Desenho, Tagarelinha">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main1.css') }}">
+    <title>Início - Tagarelinha</title>
+
+    <!-- CSS para manipular posições das imagens -->
+    <style>
+        #baby {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 20px;
+            /* Ajuste a distância do topo */
+            left: 90%;
+            /* Centralizar horizontalmente */
+            width: 60px;
+            /* Rotação */
+            transform: rotate(10deg);
+        }
+
+        #urso {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 125px;
+            /* Ajuste a distância do topo */
+            left: 5%;
+            /* Centralizar horizontalmente */
+            width: 50px;
+            /* Rotação */
+            transform: rotate(20deg);
+        }
+
+        #trem {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 315px;
+            /* Ajuste a distância do topo */
+            left: 20%;
+            /* Centralizar horizontalmente */
+            width: 67px;
+            /* Rotação */
+            transform: rotate(-20deg);
+        }
+
+        #pira {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 420px;
+            /* Ajuste a distância do topo */
+            left: 95%;
+            /* Centralizar horizontalmente */
+            width: 60px;
+        }
+
+        #abc {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 500px;
+            /* Ajuste a distância do topo */
+            left: 2%;
+            /* Centralizar horizontalmente */
+            width: 70px;
+        }
+
+        #cho {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 350px;
+            /* Ajuste a distância do topo */
+            left: 65%;
+            /* Centralizar horizontalmente */
+            width: 50px;
+            /* Rotação */
+            transform: rotate(-20deg);
+        }
+
+        #carro {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 20px;
+            /* Ajuste a distância do topo */
+            left: 30%;
+            /* Centralizar horizontalmente */
+            width: 70px;
+        }
+
+        #cavalo {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 180px;
+            /* Ajuste a distância do topo */
+            left: 78%;
+            /* Centralizar horizontalmente */
+            width: 70px;
+            /* Rotação */
+            transform: rotate(20deg);
+        }
+
+        #aviao {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 90px;
+            /* Ajuste a distância do topo */
+            left: 60%;
+            /* Centralizar horizontalmente */
+            width: 70px;
+            /* Rotação */
+            transform: rotate(20deg);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Logo -->
+    <header>
+        <center><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"
+                    class="logo"></a></center>
+    </header>
+
+    <!-- Imagens espalhadas pela tela -->
+    <img src="{{ url_for('static', filename='abc.png') }}" alt="abc" id="abc">
+    <img src="{{ url_for('static', filename='cho.png') }}" alt="chocalho" id="cho">
+    <img src="{{ url_for('static', filename='cavalo.png') }}" alt="cavalo de pau" id="cavalo">
+    <img src="{{ url_for('static', filename='carro.png') }}" alt="carro" id="carro">
+    <img src="{{ url_for('static', filename='aviaao.png') }}" alt="avião" id="aviao">
+    <img src="{{ url_for('static', filename='baby.png') }}" alt="brinquedo" id="baby">
+    <img src="{{ url_for('static', filename='pira.png') }}" alt="pirâmede" id="pira">
+    <img src="{{ url_for('static', filename='trem.png') }}" alt="trem" id="trem">
+    <img src="{{ url_for('static', filename='urso.png') }}" alt="urso" id="urso">
+
+    <!-- Container principal -->
+    <main class="home-container">
+        <section class="intro">
+            <h1>Bem-vindo ao Tagarelinha!</h1>
+            <center>
+                <p>Explore o fascinante mundo das letras e sons de forma divertida e interativa. Aprenda brincando com
+                    nossas ferramentas de escrita, escuta e desenho!</p><br>
+            </center>
+            <a href="{{ url_for('principal') }}">Comece Agora!</a>
+        </section>
+
+
+        <!-- sessão com informações -->
+        <section class="highlights">
+            <div class="card-highlight">
+                <h2>🎨 Desenhe e Aprenda</h2>
+                <p>Desenvolva suas habilidades motoras com nossa ferramenta de desenho interativo no canvas.</p>
+            </div>
+
+            <div class="card-highlight">
+                <h2>🗣️ Ouça as Letras</h2>
+                <p>Aperte um botão e escute a pronúncia correta das letras.</p>
+            </div>
+
+            <div class="card-highlight">
+                <h2>📈 Evolua Sempre</h2>
+                <p>Acompanhe seu progresso e continue aprendendo enquanto se diverte!</p>
+            </div>
+        </section>
+    </main>
+
+
+</body>
+
+</html>

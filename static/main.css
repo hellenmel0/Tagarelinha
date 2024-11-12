@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --primary-color: #0B3A40;
+    --secondary-color: #29A6A6;
+    --accent-color: #20818C;
+    --light-background: #91F2F2;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Cherry Bomb One", system-ui;
+    padding: 10px;
+    background-color: var(--light-background);
+    color: var(--primary-color);
+
+}
+
+header .logo {
+    width: 100px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    /* Adapta para telas menores */
+    gap: 150px;
+    /* Ajuste para melhor responsividade */
+}
+
+nav a {
+    color: #0B3A40;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+nav a:hover {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #29A6A6;
+
+}
+
+#perfil {
+    margin-left: 40px;
+}
+
+.user-icon img {
+    width: 40px;
+    height: 40px;
+
+}
+
+h1 {
+    margin: 0;
+    color: #0B3A40;
+    font-size: 35px;
+    margin-bottom: 10px;
+    font-family: "Cherry Bomb One", system-ui;
+}
+
+h2 {
+    margin: 0;
+    color: #0B3A40;
+    font-size: 30px;
+    font-family: "Cherry Bomb One", system-ui;
+}
+
+
+
+main {
+    padding: 20px;
+}
+
+.content {
+    text-align: center;
+}
+
+.card {
+    display: flex;
+    justify-content: space-around;
+    margin-left: 60px;
+    flex-direction: column;
+    /* Alinhamento em tela pequena */
+
+    width: 90%;
+}
+
+@media (min-width: 768px) {
+    .card {
+        flex-direction: row;
+    }
+}
+
+.box-aluno {
+    border: 7px solid #20818C;
+    border-radius: 8px;
+    width: 50%;
+    background-color: white;
+}
+
+.box-imagem {
+    border: 7px solid #0B3A40;
+    border-radius: 8px;
+    width: 50%;
+    background-color: white;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #00bcd4;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+
+
+button {
+    border: none;
+    border-radius: 10px;
+    background-color: white;
+    color: #0B3A40;
+}
+
+span {
+    font-weight: bolder;
+}
+
+.submit {
+    color: white;
+    background-color: #0B3A40;
+    width: 20%;
+    padding: 10px;
+    margin-top: 10px;
+    font-family: "Cherry Bomb One", system-ui;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+#nextButton {
+    position: absolute;
+    /* Usar posicionamento absoluto */
+    top: 375px;
+    /* Ajuste a distância do topo */
+    left: 46%;
+    /* Centralizar horizontalmente */
+    width: 100px;
+    background-color: #0B3A40;
+    padding: 5px;
+}
+
+.clear,
+.save,
+.listen {
+    width: 40px;
+
+}
+
+#clearButton {
+    float: right;
+    margin: 22px 0px 5px 0px;
+}
+
+#saveButton {
+    float: left;
+    margin: 22px 0px 5px 0px;
+}
+
+#listenButton {
+    margin-top: 20px;
+    float: left;
+    margin: 15px 0px 5px 0px;
+}
+
+#predictButton {
+    margin-top: 15px;
+}
+
+
+
+.feedback {
+    font-size: 50px; /* Aumenta o tamanho das carinhas */
+}
+#predictButton,
+#prevButton {
+    padding: 10px 30px;
+    border: none;
+    font-family: "Cherry Bomb One", system-ui;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: #0B3A40;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
+
+
+.feedback {
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    background-color: #29A6A6;
+    color: #ffffff;
+    font-family: "Cherry Bomb One", system-ui;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tagarelinha: Aprenda brincando com letras e desenhos!">
+    <meta name="keywords" content="Educação, Aprendizagem, Letras, Desenho, Tagarelinha">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main2.css') }}">
+    <title>FALAR É FÁCIL - TAGARELINHA</title>
+    <style>
+        button.listen-button {
+            width: 50px;
+            height: 50px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            bottom: -10px;
+        }
+
+        button.listen-button img {
+            width: 50px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Cabeçalho da página -->
+    <header>
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo">
+        </a>
+        <nav>
+            <ul>
+                <!-- Links para outras páginas do sistema -->
+                <li><a href="{{ url_for('principal') }}">Início</a></li>
+                <li><a href="{{ url_for('fala') }}">Falar é fácil</a></li>
+                <li><a href="{{ url_for('letras') }}">Letras</a></li>
+            </ul>
+        </nav>
+
+        <!-- Link da página de perfil para futuras aplicações-->
+        <div class="user-icon">
+            <a href="{{ url_for('perfil') }}">
+                <img src="{{ url_for('static', filename='perfil.png') }}" id="perfil" alt="Usuário">
+            </a>
+        </div>
+    </header>
+
+    <!-- Container das fotos da boca -->
+    <div class="fotos">
+        <div>
+            <img src="{{ url_for('static', filename='A.png') }}" alt="A">
+            <center><button class="listen-button" data-vowel="A">
+                    <!--data-vowel é ligado ao script para a reprodução da letra-->
+                    <img class="listen" src="{{ url_for('static', filename='falante.png') }}" alt="Ouvir">
+                </button></center>
+        </div>
+        <div>
+            <img src="{{ url_for('static', filename='E.png') }}" alt="E">
+            <center><button class="listen-button" data-vowel="E">
+                    <!--data-vowel é ligado ao script para a reprodução da letra-->
+                    <img class="listen" src="{{ url_for('static', filename='falante.png') }}" alt="Ouvir">
+                </button></center>
+        </div>
+        <div>
+            <img src="{{ url_for('static', filename='I.png') }}" alt="I">
+            <center><button class="listen-button" data-vowel="I">
+                    <!--data-vowel é ligado ao script para a reprodução da letra-->
+                    <img class="listen" src="{{ url_for('static', filename='falante.png') }}" alt="Ouvir">
+                </button></center>
+        </div>
+        <div>
+            <img src="{{ url_for('static', filename='O.png') }}" alt="O">
+            <center><button class="listen-button" data-vowel="O">
+                    <!--data-vowel é ligado ao script para a reprodução da letra-->
+                    <img class="listen" src="{{ url_for('static', filename='falante.png') }}" alt="Ouvir">
+                </button></center>
+        </div>
+        <div>
+            <img src="{{ url_for('static', filename='U.png') }}" alt="U">
+            <center><button class="listen-button" data-vowel="U">
+                    <!--data-vowel é ligado ao script para a reprodução da letra-->
+                    <img class="listen" src="{{ url_for('static', filename='falante.png') }}" alt="Ouvir">
+                </button></center>
+        </div>
+    </div>
+    <!-- Container com as letras -->
+    <div class="letras">
+        <p>A</p>
+        <p>E</p>
+        <p>I</p>
+        <p>O</p>
+        <p>U</p>
+    </div>
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; Copyright 2024 - Tagarelinha</p>
+    </footer>
+    <!-- Script para a função 'ouça' -->
+    <script>
+
+        // Evento de voz em português
+        function speakLetter(letter) {
+            const synth = window.speechSynthesis;                                   // Objeto de síntese de fala do navegador
+            const utterance = new SpeechSynthesisUtterance(letter);                 // Cria uma fala com a letra
+            utterance.lang = 'pt-BR';                                               // Define o idioma como português do Brasil
+            synth.speak(utterance);                                                 // Executa a fala
+        }
+
+        // Adiciona evento de clique aos botões corretamente, assim quando o usuário clicar no botão 'ouça' o sistema dispara a letra
+        document.querySelectorAll('.listen-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const vowel = button.getAttribute('data-vowel');
+                speakVowel(vowel);
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tagarelinha: Aprenda brincando com letras e desenhos!">
+    <meta name="keywords" content="Educação, Aprendizagem, Letras, Desenho, Tagarelinha">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main1.css') }}">
+    <title>Início - Tagarelinha</title>
+
+    <!-- CSS para manipular posições das imagens -->
+    <style>
+        #baby {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 20px;
+            /* Ajuste a distância do topo */
+            left: 90%;
+            /* Centralizar horizontalmente */
+            width: 60px;
+            /* Rotação */
+            transform: rotate(10deg);
+        }
+
+        #urso {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 125px;
+            /* Ajuste a distância do topo */
+            left: 5%;
+            /* Centralizar horizontalmente */
+            width: 50px;
+            /* Rotação */
+            transform: rotate(20deg);
+        }
+
+        #trem {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 460px;
+            /* Ajuste a distância do topo */
+            left: 40%;
+            /* Centralizar horizontalmente */
+            width: 67px;
+            /* Rotação */
+            transform: rotate(-20deg);
+        }
+
+        #pira {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 290px;
+            /* Ajuste a distância do topo */
+            left: 95%;
+            /* Centralizar horizontalmente */
+            width: 60px;
+        }
+
+        #abc {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 500px;
+            /* Ajuste a distância do topo */
+            left: 2%;
+            /* Centralizar horizontalmente */
+            width: 70px;
+        }
+
+        #cho {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 370px;
+            /* Ajuste a distância do topo */
+            left: 65%;
+            /* Centralizar horizontalmente */
+            width: 50px;
+            /* Rotação */
+            transform: rotate(-20deg);
+        }
+
+        #carro {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 20px;
+            /* Ajuste a distância do topo */
+            left: 30%;
+            /* Centralizar horizontalmente */
+            width: 70px;
+        }
+
+        #cavalo {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 480px;
+            /* Ajuste a distância do topo */
+            left: 85%;
+            /* Centralizar horizontalmente */
+            width: 70px;
+            /* Rotação */
+            transform: rotate(20deg);
+        }
+
+        #aviao {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 90px;
+            /* Ajuste a distância do topo */
+            left: 60%;
+            /* Centralizar horizontalmente */
+            width: 70px;
+            /* Rotação */
+            transform: rotate(20deg);
+        }        
+        
+        #pc {
+            position: absolute;
+            /* Usar posicionamento absoluto */
+            top: 280px;
+            /* Ajuste a distância do topo */
+            left: 20%;
+            /* Centralizar horizontalmente */
+            width: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Logo -->
+    <header>
+        <center><a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"
+                    class="logo"></a></center>
+    </header>
+
+    <!-- Imagens espalhadas pela tela -->
+    <img src="{{ url_for('static', filename='abc.png') }}" alt="abc" id="abc">
+    <img src="{{ url_for('static', filename='cho.png') }}" alt="chocalho" id="cho">
+    <img src="{{ url_for('static', filename='cavalo.png') }}" alt="cavalo de pau" id="cavalo">
+    <img src="{{ url_for('static', filename='carro.png') }}" alt="carro" id="carro">
+    <img src="{{ url_for('static', filename='aviaao.png') }}" alt="avião" id="aviao">
+    <img src="{{ url_for('static', filename='baby.png') }}" alt="brinquedo" id="baby">
+    <img src="{{ url_for('static', filename='pira.png') }}" alt="pirâmede" id="pira">
+    <img src="{{ url_for('static', filename='trem.png') }}" alt="trem" id="trem">
+    <img src="{{ url_for('static', filename='pc.png') }}" alt="desktop" id="pc">
+    <img src="{{ url_for('static', filename='urso.png') }}" alt="urso" id="urso">
+
+    <!-- Container principal -->
+    <main class="home-container">
+        <section class="intro">
+            <h1>ESTÁ PÁGINA ESTÁ EM DESENVOLVIMENTO</h1>
+            <center>
+                <p>Escolhemos deixar essa página para próximas versões!</p>
+                <p>Se o sistema for viavel ela entrará em fase de desenvolvimento</p><br><br>
+            </center>
+            <a href="{{ url_for('principal') }}">Volte ao Início</a>
+        </section>
+</body>
+
+</html>

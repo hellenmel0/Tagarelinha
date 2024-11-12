@@ -74,7 +74,84 @@ def generate_pdf(dataframe, pdf_path):
 def index():
     return render_template('index.html')
 
+# Página principal, rota principal
+@app.route('/principal')
+def principal():
+    return render_template('principal.html')
+
+# Página letras, rota letras
+@app.route('/letras')
+def letras():
+    return render_template('letras.html')
+
+# Página fala, rota fala
+@app.route('/fala')
+def fala():
+    return render_template('fala.html')
+
+# Página perfil, rota perfil
+@app.route('/perfil')
+def perfil():
+    return render_template('perfil.html')
+
+#Rota /predict para processar o arquivo da letra desenhada. 
+# Converte a imagem para RGB, realiza OCR, salva e verifica se a 
+# letra foi reconhecida corretamente, retornando o resultado 
+# em JSON.@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST'])
+def predict():
+    if 'file' not in request.files:
+        return jsonify({'error': 'Nenhum arquivo enviado'}), 400
+
+    file = request.files['file']
+    expected_letter = request.form.get('expectedLetter', '').upper()
+
+    try:
+        img = Image.open(io.BytesIO(file.read())).convert('RGB')
+        img = np.array(img)
+
+        result = ocr.ocr(img, cls=True)
+        prediction = [word_info[1][0].upper() for line in result for word_info in line]
+        recognized_letter = prediction[0] if prediction else 'Não reconhecido'
+
+        # Verifica se o reconhecimento é bem-sucedido
+        success = recognized_letter == expected_letter or (expected_letter == 'O' and recognized_letter == '0')
+
+        # Salva o resultado da tentativa de reconhecimento
+        #save_result(expected_letter, recognized_letter, success)
+
+        return jsonify({'prediction': recognized_letter, 'success': success})
+
+    except Exception as e:
+        print(f'Erro durante o reconhecimento: {e}')
+        return jsonify({'prediction': 'Erro ao reconhecer', 'success': False}), 500
+
+
+# Rota para análise de resultados e geração de PDF, não será mais utilizada
+'''@app.route('/analyze', methods=['GET'])
+def analyze():
+    try:
+        # Carrega os dados do CSV
+        df = pd.read_csv('test_results.csv', names=['Timestamp', 'Expected', 'Recognized', 'Success'])
+        
+        # Calcula as taxas de acertos e erros para cada letra
+        analysis = df.groupby('Expected')['Success'].mean().reset_index()
+        analysis['Error Rate'] = 1 - analysis['Success']
+        analysis.columns = ['Letter', 'Accuracy Rate', 'Error Rate']
+
+        # Caminho do arquivo PDF
+        pdf_path = 'letter_analysis.pdf'
+
+        # Gera o PDF com a análise
+        generate_pdf(analysis, pdf_path)
+
+        # Envia o arquivo PDF para download
+        return send_file(pdf_path, as_attachment=True)
+
+    except Exception as e:
+        print(f'Erro na análise de dados: {e}')
+        return jsonify({'error': 'Erro na análise de dados'}), 500'''
 
 #Inicia o servidor Flask em modo de depuração.
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5001, debug=True)
+    app.run(debug=True)

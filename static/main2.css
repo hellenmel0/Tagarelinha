@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+    --primary-color: #0B3A40;
+    --secondary-color: #29A6A6;
+    --accent-color: #20818C;
+    --light-background: #91F2F2;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f6f9f6;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Cherry Bomb One", system-ui;
+    padding: 15px;
+    background-color: var(--light-background);
+    color: var(--primary-color);
+
+}
+
+header .logo {
+    width: 110px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap; /* Adapta para telas menores */
+    gap: 150px; /* Ajuste para melhor responsividade */
+}
+
+nav a {
+    color: #0B3A40;
+    text-decoration: none;
+    font-size: 30px;
+}
+
+nav a:hover {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #29A6A6;
+
+}
+
+
+#perfil {
+    margin-left: 40px;
+}
+
+.user-icon img {
+    width: 40px;
+    height: 40px;
+
+}
+
+footer {
+    text-align: center;
+    padding: 5px;
+    font-size: 20px;
+    background-color: #29A6A6;
+    color: #ffffff;
+    font-family: "Cherry Bomb One", system-ui;
+}
+
+img{
+    width: 250px;
+}
+
+
+    
+
+
+.fotos{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+p{
+    align-items: center;
+}
+
+.letras{
+    
+    display: flex;
+    justify-content: space-around;
+    font-family:"Cherry Bomb One", system-ui;
+    font-size: 50px;
+    color: #0B3A40;
+}

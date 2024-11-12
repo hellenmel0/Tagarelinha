@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tagarelinha: Aprenda brincando com letras e desenhos!">
+    <meta name="keywords" content="Educação, Aprendizagem, Letras, Desenho, Tagarelinha">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main3.css') }}">
+    <title>LETRAS - TAGARELINHA</title>
+</head>
+
+<body>
+    <!-- Cabeçalho da página -->
+    <header>
+        <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"
+                class="logo"></a>
+        <nav>
+            <ul>
+                <!-- Links para outras páginas do sistema -->
+                <li><a href="{{ url_for('principal') }}">Início</a></li>
+                <li><a href="{{ url_for('fala') }}">Falar é fácil</a></li>
+                <li><a href="{{ url_for('letras') }}">Letras</a></li>
+            </ul>
+        </nav>
+
+        <!-- Link da página de perfil para futuras aplicações-->
+        <div class="user-icon">
+            <a href="{{ url_for('perfil') }}">
+                <img src="{{ url_for('static', filename='perfil.png') }}" id="perfil" alt="Usuário">
+            </a>
+        </div>
+    </header>
+
+    <!-- Conteúdo principal -->
+    <main>
+        <!-- Opção para escolher a letra que o usuário deseja revisar-->
+        <center>
+            <h1>ESCOLHA UMA LETRA</h1>
+        </center>
+
+        <section class="letter-grid" id="letterGrid">
+            <!-- Gera automaticamente todas as letras -->
+        </section>
+
+        <!-- Conteiner para desenhar -->
+        <div class="card">
+            <!-- Canvas onde o usuário pode desenhar -->
+            <div class="box-aluno">
+                <div class="topo">
+                    <!-- Botão com a função de salvar imagem -->
+                    <button id="saveButton">Salvar<br><img class="save"
+                            src="{{ url_for('static', filename='save.png') }}" alt="Salvar"></button>
+
+                    <h2>Aluno</h2>
+
+                    <!-- Botão com a função de limpar o canvas -->
+                    <button id="clearButton">Apagar<br><img class="clear"
+                            src="{{ url_for('static', filename='erase.png') }}" alt="APAGAR"></button>
+                </div>
+                <!-- Canvas onde é possivel realizar o desenho -->
+                <canvas id="drawingCanvas" width="500" height="250"></canvas>
+            </div>
+
+
+            <!-- Box do sistema, aparecerá a letra escolhida pelo usuário -->
+            <div class="box-imagem">
+                <div class="topo2">
+                    <!-- Botão com a função de ouvir a letra escolhida -->
+                    <button id="listenButton">Ouça<br><img class="listen"
+                            src="{{ url_for('static', filename='falante.png') }}" alt="Ouvir"></button>
+
+                    <h2>Letra Escolhida</h2>
+
+                    <!-- Botão com a função de limpar o canvas -->
+                    <button id="clearChosenLetterButton">Apagar<br><img class="clear"
+                            src="{{ url_for('static', filename='erase.png') }}" alt="APAGAR"></button>
+                </div>
+                <center>
+                    <!-- Letra escolhida -->
+                    <h3 id="chosenLetter"></h3>
+                </center>
+            </div>
+        </div>
+
+        <center>
+            <!-- Botão de enviar a imagem para a analise da IA -->
+            <button id="predictButton">ENVIAR</button>
+            <br><br>
+
+            <!-- Retorno da IA -->
+            <div class="feedback" id="feedbackIcon"></div>
+        </center>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; Copyright 2024 - Tagarelinha</p>
+    </footer>
+
+    <!-- Script com as funções utilizadas -->
+    <script>
+        // Variáveis 
+        const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');                    // Lista (array) com letras do alfabeto 
+        const letterGrid = document.getElementById('letterGrid');                   // Refrência ao grid no html com ID letterGrid
+        const chosenLetterElem = document.getElementById('chosenLetter');           // Referência ao elemento que mostra a letra selecionada.
+        const canvas = document.getElementById('drawingCanvas');                    // Referência ao elemento canvas para desenha
+        const context = canvas.getContext('2d');                                    //Dimensões do elemento canvas, para a manipulação gráfica
+
+        //Referências aos botões 'Apagar', 'Enviar', 'Ouça' e ao ícone de feedback 
+        const clearButton = document.getElementById('clearButton');
+        const predictButton = document.getElementById('predictButton');
+        const feedbackIcon = document.getElementById('feedbackIcon');
+        const listenButton = document.getElementById('listenButton');
+        const clearChosenLetterButton = document.getElementById('clearChosenLetterButton');
+
+        let chosenLetter = '';
+
+        // Para cada letra do alfabeto, cria um elemento de letra e configura um evento de clique
+        alphabet.forEach(letter => {
+            const letterElem = document.createElement('div');                       // Cria um elemento 'div' para representar a letra
+            letterElem.textContent = letter;                                        // Define o texto do elemento como a letra atual
+            letterElem.classList.add('letter');                                     // Adiciona uma classe 'letter' para estilização
+            letterElem.addEventListener('click', () => {                            // Adiciona um evento de clique na letra
+                chosenLetter = letter;                                              // Define a letra escolhida
+                chosenLetterElem.textContent = letter;                              // Exibe a letra escolhida na interface
+                context.clearRect(0, 0, canvas.width, canvas.height);               // Limpa o desenho ao escolher nova letra
+                feedbackIcon.textContent = '';                                      // Limpa o feedback de resposta ao mudar de letra
+                clearFeedback();                                                    // Chama a função para limpar o feedback
+            });
+            letterGrid.appendChild(letterElem);                                     // Adiciona o elemento da letra ao grid de letras
+        });
+
+        // Função para síntese de fala
+        function speakLetter(letter) {
+            const synth = window.speechSynthesis;                                   // Objeto de síntese de fala do navegador
+            const utterance = new SpeechSynthesisUtterance(letter);                 // Cria uma fala com a letra
+            utterance.lang = 'pt-BR';                                               // Define o idioma como português do Brasil
+            synth.speak(utterance);                                                 // Executa a fala
+        }
+
+        // Evento para o botão "Ouça"
+        listenButton.addEventListener('click', () => {
+            if (chosenLetter) {
+                speakLetter(chosenLetter);                                          // Fala a letra escolhida
+            } else {
+                alert('Escolha uma letra primeiro!');                               // Alerta se nenhuma letra foi escolhida
+            }
+        });
+
+        // Lógica para desenho no canvas
+        let drawing = false;                                                        // Estado para indicar se o usuário está desenhando
+        context.lineWidth = 15;                                                     // Define a largura da linha
+        context.lineCap = 'round';                                                  // Define a forma da ponta da linha
+        context.strokeStyle = '#0B3A40';                                            // Define a cor da linha
+
+        canvas.addEventListener('mousedown', (event) => {                           // Inicia o desenho ao pressionar o mouse
+            drawing = true;                                                         // Ativa o estado de desenho
+            const rect = canvas.getBoundingClientRect();                            // Pega as coordenadas do canvas
+            context.beginPath();                                                    // Inicia um novo caminho de desenho
+            context.moveTo(event.clientX - rect.left, event.clientY - rect.top);    // Move para o ponto inicial
+        });
+
+        canvas.addEventListener('mousemove', (event) => {                           // Desenha enquanto o mouse se move
+            if (drawing) {                                                          // Verifica se o desenho está ativado
+                const rect = canvas.getBoundingClientRect();
+                context.lineTo(event.clientX - rect.left, event.clientY - rect.top);// Cria uma linha até o ponto atual
+                context.stroke();                                                   // Desenha a linha
+            }
+        });
+
+        canvas.addEventListener('mouseup', () => {                                  // Finaliza o desenho ao soltar o mouse
+            drawing = false;                                                        // Desativa o estado de desenho
+        });
+
+        // Função para limpar o feedback e a letra escolhida
+        function clearFeedback() {
+            feedbackIcon.textContent = '';                                          // Limpa o feedback
+        }
+
+        // Limpa o canvas
+        clearButton.addEventListener('click', () => {
+            context.clearRect(0, 0, canvas.width, canvas.height);                   // Limpa todo o conteúdo do canvas
+            feedbackIcon.textContent = '';                                          // Limpa o feedback
+        });
+
+        // Limpa a letra escolhida
+        clearChosenLetterButton.addEventListener('click', () => {
+            chosenLetter = '';                                                      // Reseta a letra escolhida
+            chosenLetterElem.textContent = '';                                      // Limpa o elemento de letra escolhida na interface
+            feedbackIcon.textContent = '';                                          // Limpa o feedback
+        });
+
+        // Envia a imagem desenhada para o servidor
+        predictButton.addEventListener('click', () => {
+            if (!chosenLetter) {                                                    // Verifica se uma letra foi escolhida
+                alert('Escolha uma letra primeiro!');                               // Alerta caso não tenha uma letra selecionada
+                return;
+            }
+
+            // Cria um canvas temporário para preparar a imagem para o envio
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            const tempContext = tempCanvas.getContext('2d');
+
+            // Preenche o fundo do canvas temporário com branco
+            tempContext.fillStyle = '#FFFFFF';
+            tempContext.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+            tempContext.drawImage(canvas, 0, 0);                                    // Copia o conteúdo do canvas principal para o temporário
+
+            // Converte o canvas para um blob (arquivo de imagem) e o envia para o servidor
+            tempCanvas.toBlob((blob) => {
+                const formData = new FormData();                                    // Cria um objeto FormData para o envio
+                formData.append('file', blob);                                      // Anexa a imagem desenhada
+                formData.append('expectedLetter', chosenLetter);                    // Anexa a letra esperada
+
+                fetch('/predict', {                                                 // Faz uma requisição POST para o servidor
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.json())                              // Converte a resposta para JSON
+                    .then(data => {
+                        feedbackIcon.innerHTML = data.success
+                            ? '😊'                                                 // Mostra um ícone de carinha feliz se estiver correto
+                            : '😢';                                                // Mostra um ícone de carinha triste se estiver incorreto
+                    })
+                    .catch(error => console.error('Erro:', error));                // Mostra um erro no console caso ocorra
+            }, 'image/png');
+        });
+
+    </script>
+</body>
+
+</html>
